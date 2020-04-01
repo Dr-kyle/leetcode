@@ -26,10 +26,38 @@ package com.kyle.leetcode.three;
 // Related Topics 哈希表 双指针 字符串 Sliding Window
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int lengthOfLongestSubstring(String s) {
-        return 1;
+        if (null == s || "".equals(s)) {
+            return 0;
+        }
+        if (s.length() == 1) {
+            return 1;
+        }
+        int left = 0;
+        int max = 0;
+        int right;
+        Map<Character, Integer> map = new HashMap<>();
+        for (right = 0; right < s.length(); right++) {
+            if (map.containsKey(s.charAt(right))) {
+                Integer index = map.get(s.charAt(right));
+                //如果字符在left和right之间
+                if (index >= left) {
+                    left = index + 1;
+                }
+            }
+            max = Math.max(right - left + 1, max);
+            map.put(s.charAt(right), right);
+        }
+        return max;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new Solution().lengthOfLongestSubstring("abcabcbb"));
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
