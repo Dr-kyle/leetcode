@@ -1,4 +1,4 @@
-package com.kyle.leetcode.one;
+package com.kyle.leetcode.l1;
 
 import java.util.HashMap;
 import java.util.Map;
